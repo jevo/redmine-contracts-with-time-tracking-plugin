@@ -1,5 +1,5 @@
 A Redmine plugin for managing the time/money being spent on client contracts.
-
+ 
 This plugin allows you to: 
 
 - Create and store client contracts
