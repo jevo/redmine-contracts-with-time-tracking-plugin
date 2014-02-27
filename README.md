@@ -5,9 +5,15 @@ Here are just the modification explained.
 
 #Modification and Screenshots
 
-Now contracts can be assign to all users or only one user in a project. The assigned contracts are avaible in the sub projects.
+Now contracts can be assign to all users or only one user in a project. The assigned contracts are avaible in the sub projects. Additional small changes in the form for a new contract:
 
-# Edit a personal contract
+- layouted by css
+- automatic setted the contract end date 1 month after the current date
+- hiding the contractor rates - see roles and permissions
+- adding the select for assign a user
+
+
+## Edit a personal contract
 
 ![edit a personal contract](https://github.com/jevo/redmine-personal-contracts-with-time-tracking-plugin/raw/master/docs/screenshots/edit_personal_contract.png)
 
@@ -15,7 +21,7 @@ Now contracts can be assign to all users or only one user in a project. The assi
 ## Book spent time 
 In the view of the *spent time* the user can select a contract. 
 
-![book spent time and chosing a personal contract](https://github.com/jevo/redmine-personal-contracts-with-time-tracking-plugin/raw/master/docs/screenshots/book_spent_time.png)
+![book spent time and chosing a personal contract](https://github.com/jevo/redmine-personal-contracts-with-time-tracking-plugin/docs/screenshots/edit_personal_contract.png)
 
 ## All my personal contracts
 
