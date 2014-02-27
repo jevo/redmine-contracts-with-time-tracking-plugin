@@ -15,7 +15,7 @@ Now contracts can be assign to all users or only one user in a project. The assi
 ## Book spent time 
 In the view of the *spent time* the user can select a contract. 
 
-![book spent time and chosing a personal contract](https://github.com/jevo/redmine-personal-contracts-with-time-tracking-plugin/docs/screenshots/edit_personal_contract.png)
+![book spent time and chosing a personal contract](https://github.com/jevo/redmine-personal-contracts-with-time-tracking-plugin/docs/screenshots/book_spent_time.png)
 
 ## All my personal contracts
 
