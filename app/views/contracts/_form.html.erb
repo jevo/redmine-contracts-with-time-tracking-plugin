@@ -6,53 +6,43 @@
   <%= f.hidden_field :project_id, :value => @project.id %>
   <div>
     <p><%= f.label :title %></p>
-    <p><%= f.text_field :title, :value => title, :size => 50 %></p>
-  </div>
-  <div>
+    <p><%= f.text_field :title, :value => title, :size => 50, :required => true %></p>
     <p><%= f.label :description %></p>
-    <p><%= f.text_area :description, { :cols => 50, :rows => 3 } %></p>
-  </div>
-  <div>
-    <p><%= f.label l(:field_agreement_date) %></p>
-    <p><%= f.date_select :agreement_date %></p>
-  </div>
-  <div>
-    <p><%= f.label l(:field_start_date) %></p>
-    <p><%= f.date_select :start_date %></p>
-  </div>
-  <div>
-    <p><%= f.label l(:field_end_date) %></p>
-    <p><%= f.date_select :end_date %></p>
-  </div>
-  <div>
-    <p><%= f.label l(:field_purchase_amount) %></p>
-    <p><%= l('number.currency.format.unit') if l('number.currency.format.format').index('%u') == 0 %> <%= f.text_field :purchase_amount, :size => 10 %> <%= l('number.currency.format.unit') if l('number.currency.format.format').index('%u') != 0 %></p>
-  </div>
-  <div>
-    <p><%= f.label l(:field_hourly_rate) %></p>
-    <p><%= l('number.currency.format.unit') if l('number.currency.format.format').index('%u') == 0 %> <%= f.text_field :hourly_rate, :size => 10 %> <%= l('number.currency.format.unit') if l('number.currency.format.format').index('%u') != 0 %></p>
-  </div>
-  <div>
-    <p><%= f.label l(:field_contract_url) %></p>
-    <p><%= f.text_field :contract_url, :size => 50 %></p>
-  </div>
-  <div>
-    <p><%= f.label l(:field_invoice_url) %></p>
-    <p><%= f.text_field :invoice_url, :size => 50 %></p>
-  </div>
+    <p><%= f.text_area :description, { :cols => 50, :rows => 3} %></p> 
+    <p><%= f.label l(:field_agreement_date) %><%= f.date_select :agreement_date %></p>
+    <p><%= f.label l(:field_start_date) %><%= f.date_select :start_date %></p>
+    <p><%= f.label l(:field_end_date) %><%= f.date_select :end_date, :default => 1.months.from_now  %></p>
+    <p><%= f.label :purchase_amount %><%= l('number.currency.format.unit') if l('number.currency.format.format').index('%u') == 0 %> <%= f.text_field :purchase_amount, :size => 10, :required => true %> <%= l('number.currency.format.unit') if l('number.currency.format.format').index('%u') != 0 %></p>
+    <p><%= f.label :hourly_rate %><%= l('number.currency.format.unit') if l('number.currency.format.format').index('%u') == 0 %> <%= f.text_field :hourly_rate, :size => 10, :required => true %> <%= l('number.currency.format.unit') if l('number.currency.format.format').index('%u') != 0 %></p>
+    <p><%= f.label :contract_url %><%= f.text_field :contract_url, :size => 50 %></p>
+    <p><%= f.label :invoice_url %><%= f.text_field :invoice_url, :size => 50 %></p>    
   <% if !@contractors.nil? && !@contractors.empty? %>
-    <fieldset id="contractor_rates" class="box tabular"><legend>Contractor Rates</legend>
-      <% @contractors.each do |contractor| %>
-        <% rate = @contractor_rates[contractor.id] %>
-        <p>
-          <label><%= contractor.name %></label>
-          &nbsp;&nbsp;&nbsp;$<%= text_field_tag "rates[#{contractor.id}]", format("%#.2f", rate), :size => 5 %>
-        </p>
-      <% end %>
-    </fieldset>
+  <!--to assign contract to a user-->
+      <p><%=  f.label l(:field_contractor_id) %><%= f.select :contractor_id, options_from_collection_for_select(@contractors, :id, :name, @contract.contractor_id), :prompt => 'all' %>
+      </p>
+    <% if User.current.roles_for_project(@project).first.permissions.include?(:edit_contractors_rate) %>
+      <fieldset id="contractor_rates" class="box tabular"><legend>Contractor Rates</legend>
+        <% @contractors.each do |contractor| %>
+          <% rate = @contractor_rates[contractor.id] %>
+          <p>
+            <label><%= contractor.name %></label>
+             <%if User.current.roles_for_project(@project).first.permissions.include?(:view_all_contracts_for_project)%>             
+               &nbsp;&nbsp;&nbsp;$<%= text_field_tag "rates[#{contractor.id}]", format("%#.2f", rate), :size => 5%>
+             <%else%>
+               &nbsp;&nbsp;&nbsp;$<%= text_field_tag "rates[#{contractor.id}]", format("%#.2f", rate), :size => 5, :readonly => true %>
+            <%end%>            
+          </p>
+        <% end %>    
+      </fieldset>
+  <%end%>
   <% end %>
   <div>
     <% controller.action_name == "new" ? msg = l(:label_create_contract) : msg = l(:label_update_contract) %>
     <p><%= f.submit msg  %></p>
   </div>
+<% end %>
+
+  
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'new_contract_form', :plugin => 'contracts' %>
 <% end %>

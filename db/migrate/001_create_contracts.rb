@@ -11,6 +11,7 @@ class CreateContracts < ActiveRecord::Migration
       t.string    :contract_url
       t.string    :invoice_url
       t.integer   :project_id
+      t.integer   :contractor_id
     end
   end
 end

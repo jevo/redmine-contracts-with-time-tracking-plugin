@@ -3,6 +3,7 @@ class ContractsController < ApplicationController
   before_filter :find_project, :authorize, :only => [:index, :show, :new, :create, :edit, :update, :destroy, 
                                                      :add_time_entries, :assoc_time_entries_with_contract]
   
+  
   def index
     @project = Project.find(params[:project_id])
     @contracts = Contract.order("start_date ASC").where(:project_id => @project.id)
@@ -10,9 +11,17 @@ class ContractsController < ApplicationController
     @total_purchased_hours   = @project.total_hours_purchased
     @total_remaining_dollars = @project.total_amount_remaining
     @total_remaining_hours   = @project.total_hours_remaining
+    #personal contract informations
+    @own_contracts = Contract.order("start_date ASC").where(:project_id => @project.id, :contractor_id => User.current.id)
+    #@own_contracts = Contract.order("start_date ASC").where(:contractor_name => User.current.name)
+    @own_contracts.flatten!
+    @total_own_purchased_dollars = @own_contracts.sum { |contract| contract.purchase_amount }
+    @total_own_purchased_hours   = @own_contracts.sum { |contract| contract.hours_purchased }
+    @total_own_remaining_dollars = @own_contracts.sum { |contract| contract.amount_remaining }
+    @total_own_remaining_hours   = @own_contracts.sum { |contract| contract.hours_remaining }
   end
-
-  def all
+  
+ def all
     @user = User.current
     @projects = @user.projects.select { |project| @user.roles_for_project(project).
                                                         first.permissions.
@@ -56,6 +65,7 @@ class ContractsController < ApplicationController
       flash[:error] = "* " + @contract.errors.full_messages.join("</br>* ")
       redirect_to :action => "new", :id => @contract.id
     end
+ 
   end
 
   def show
@@ -81,11 +91,14 @@ class ContractsController < ApplicationController
       @rate_error = false
       rates = params[:rates]
       @contract.rates = params[:rates]
-      rates.each_pair do |user_id, rate|
-        if rate.to_f <= 0
-          rate_error = true
-        end
+      if !rates.nil? 
+      	rates.each_pair do |user_id, rate|
+          if rate.to_f <= 0
+            rate_error = true
+          end
+        end 
       end
+
       if @rate_error
         flash[:error] = l(:text_invalid_rate)
         redirect_to :action => "edit", :id => @contract.id
@@ -98,6 +111,7 @@ class ContractsController < ApplicationController
       flash[:error] = "* " + @contract.errors.full_messages.join("</br>* ")
       redirect_to :action => "edit", :id => @contract.id
     end
+  
   end
 
   def destroy

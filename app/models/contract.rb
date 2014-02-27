@@ -16,7 +16,7 @@ class Contract < ActiveRecord::Base
   def hours_purchased
     self.purchase_amount / self.hourly_rate
   end
-
+  
   def hours_spent
     self.time_entries.sum { |time_entry| time_entry.hours }
   end
@@ -73,7 +73,7 @@ class Contract < ActiveRecord::Base
       ucr.update_attribute(:rate, rate)
     end
   end
-
+  
   def user_contract_rate_or_default(user)
     ucr = self.user_contract_rate_by_user(user)
     ucr.nil? ? self.hourly_rate : ucr.rate
@@ -85,7 +85,7 @@ class Contract < ActiveRecord::Base
   def rates=(rates)
     @rates = rates
   end
-
+  
   def user_project_rate_or_default(user)
     upr = self.project.user_project_rate_by_user(user)
     upr.nil? ? self.hourly_rate : upr.rate

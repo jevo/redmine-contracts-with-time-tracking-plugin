@@ -8,9 +8,17 @@
     </td>
     <td>
       <h3><%= l(:label_total_remaining) %></h3>
-      <p class="green bigbold"><%= number_to_currency(@total_remaining_dollars) %></p>
+      <% if @total_remaining_dollars >= 0.0 %>
+        <p class="green bigbold"><%= number_to_currency @total_remaining_dollars %></p>
+        <% else %>
+          <p class="red bigbold"><%= number_to_currency @total_remaining_dollars %></p>
+      <% end %>
       <p><%= l(:label_or) %></p>
-      <p class="blue bigbold">~<%= l_hours @total_remaining_hours %></p>
+      <% if @total_remaining_hours >= 0.0 %>
+        <p class="blue bigbold"><%= l_hours(@total_remaining_hours) %></p>
+        <% else %>
+          <p class="red bigbold"><%= l_hours(@total_remaining_hours) %></p>
+      <% end %>
     </td>
   </tr>
 </table>

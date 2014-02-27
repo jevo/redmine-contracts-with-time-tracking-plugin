@@ -2,6 +2,7 @@
 de:
   project_module_contracts: Verträge
   permission_view_all_contracts_for_project: Alle Verträge für Projekt anzeigen
+  permission_view_all_own_contracts: Persönliche Verträge anzeigen
   permission_view_contract_details: Vertragsdetails anzeigen
   permission_edit_contracts: Verträge bearbeiten
   permission_create_contracts: Verträge erstellen
@@ -11,7 +12,12 @@ de:
   contracts: Verträge
   label_contracts: Verträge
   label_contract: Vertrag
+  label_personal_contracts: Persönliche Verträge
+  label_all_contracts: Alle Verträge
+  label_user: Benutzer
+  label_usergroup: Gruppe
   label_new_contract: Neuer Vertrag
+  label_new_personal_contract: Neuer persönlicher Vertrag
   label_editing_contract: Vertrag bearbeiten
   label_add_time_entries: Zeiten zuordnen
   label_edit: bearbeiten
@@ -42,7 +48,7 @@ de:
   label_total_remaining: verbleibend für alle Verträge
   label_or: "-oder-"
   label_create_contract: Vertrag anlegen
-  label_update_contract: Vertrag berarbeiten
+  label_update_contract: Vertrag bearbeiten
   label_contract_empty: kein Vertrag
 
   text_are_you_sure_delete_title: "Sind sie sicher das Sie %{value} löschen möchten?"
@@ -65,3 +71,4 @@ de:
   field_hourly_rate: Stundensatz
   field_contract_url: Vertrags-URL
   field_invoice_url: Rechnungs-URL
+  field_contractor_id: Vertrag für

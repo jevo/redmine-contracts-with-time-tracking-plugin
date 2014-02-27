@@ -19,6 +19,10 @@
     </tr>
   </thead>
   <% @contracts.each do |contract| %>
+    <tr><td>
+    
+      </td></tr>
+    
     <tr class="<%= cycle("odd", "even") %>">
       <td>
         <%= link_to contract.title, { :controller => 'contracts', :action => 'show', :project_id => contract.project.identifier, :id => contract.id } %>
@@ -30,9 +34,17 @@
         <td><%= number_to_currency(contract.hourly_rate) %></td>
       <% end %>
       <td><%= number_to_currency(contract.expenses_total) %></td>
-      <td class="green"><%= number_to_currency(contract.amount_remaining) %></td>
+      <% if contract.amount_remaining < 0.0 %>
+        <td class="red"><%= number_to_currency(contract.amount_remaining) %></td>
+        <% else %>
+          <td class="green"><%= number_to_currency(contract.amount_remaining) %></td>
+      <% end %>
       <td><%= number_with_precision contract.hours_spent, :precision => 2 %></td>
-      <td class="blue"><%= number_with_precision contract.hours_remaining, :precision => 2 %></td>
+      <% if number_with_precision contract.hours_remaining < 0.00 %>
+          <td class="red"><%= number_with_precision contract.hours_remaining, :precision => 2 %></td>
+        <% else %>
+          <td class="blue"><%= number_with_precision contract.hours_remaining, :precision => 2 %></td>
+        <% end %>
       <td>
         <% if !contract.contract_url.empty? %>
           <%= link_to image_tag("/images/files/text.png"), contract.contract_url %>

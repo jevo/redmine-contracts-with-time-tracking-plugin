@@ -13,8 +13,12 @@ module Contracts
         selected_contract = ''
       end
       db_options = options_from_collection_for_select(@contracts, :id, :title, selected_contract)
+      #select contracts for user( contractor_id) or whole project
+      db_user_contract = @contracts.select {|contract| contract.contractor_id == (User.current.id) || (contract.contractor_id.nil?)}
+      db_options_user = options_from_collection_for_select(db_user_contract,:id, :title)
       no_contract_option = "<option value=''>-- #{l(:label_contract_empty)} -- </option>\n".html_safe
-      all_options = no_contract_option << db_options
+      #all_options = no_contract_option << db_options
+      all_options = no_contract_option << db_options_user
       select = context[:form].select :contract_id, all_options
       return "<p>#{select}</p>"
     end

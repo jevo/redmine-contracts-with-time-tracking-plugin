@@ -11,6 +11,7 @@ ru:
   contracts: Контракты
   label_contracts: Контракты
   label_contract: Контракт
+  label_personal_contracts: личный Контракт
   label_new_contract: Новый контракт
   label_editing_contract: Редактирование контракта
   label_add_time_entries: Добавить работы
@@ -65,3 +66,4 @@ ru:
   field_hourly_rate: Часовой рейт
   field_contract_url: Ссылка на контракт
   field_invoice_url: Ссылка на счет
+  field_contractor_id: Контракт c
