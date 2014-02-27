@@ -9,18 +9,18 @@ Now contracts can be assign to all users or only one user in a project. The assi
 
 # Edit a personal contract
 
-![edit a personal contract](https://github.com/dmp1ce/redmine-contracts-with-time-tracking-plugin//raw/master/docs/screenshots/edit_personal_contract.png)
+![edit a personal contract](https://github.com/jevo/redmine-personal-contracts-with-time-tracking-plugin/raw/master/docs/screenshots/edit_personal_contract.png)
 
 
 ## Book spent time 
 In the view of the *spent time* the user can select a contract. 
 
-![book spent time and chosing a personal contract](https://github.com/dmp1ce/redmine-contracts-with-time-tracking-plugin//raw/master/docs/screenshots/edit_personal_contract.png)
+![book spent time and chosing a personal contract](https://github.com/jevo/redmine-personal-contracts-with-time-tracking-plugin/docs/screenshots/edit_personal_contract.png)
 
 ## All my personal contracts
 
 In this view the user the a list of all his contracts and the available time and so one.
 
-![view of all my personal contracts](https://github.com/dmp1ce/redmine-contracts-with-time-tracking-plugin//raw/master/docs/screenshots/personal_contract_view.png)
+![view of all my personal contracts](https://github.com/jevo/redmine-personal-contracts-with-time-tracking-plugin/raw/master/docs/screenshots/personal_contract_view.png)
 
 
